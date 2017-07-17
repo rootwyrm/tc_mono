@@ -49,7 +49,8 @@ RUN mkdir -p /opt/talecaster/defaults ; \
 	sed -i -e '/.*salute$/d' /etc/inittab ; \
 	for bld in `ls /opt/talecaster/build/ | sort`; do \
 		/opt/talecaster/build/$bld ; \
-	done 
+	done ; \
+	rm /opt/talecaster/build/*
 	
 
 VOLUME [ "/run", "/config", "/shared", "/downloads" ]
