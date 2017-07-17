@@ -32,7 +32,7 @@ LABEL	com.rootwyrm.product="TaleCaster" \
 
 ## Create common elements
 COPY [ "application/", "/opt/talecaster" ]
-COPY [ "sv/", "/etc/sv" ]
+#COPY [ "sv/", "/etc/sv" ]
 
 RUN mkdir -p /opt/talecaster/defaults ; \
 	mkdir -p /opt/talecaster/build ; \
