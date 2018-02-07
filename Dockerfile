@@ -34,23 +34,15 @@ LABEL	com.rootwyrm.product="TaleCaster" \
 COPY [ "application/", "/opt/talecaster" ]
 #COPY [ "sv/", "/etc/sv" ]
 
-RUN mkdir -p /opt/talecaster/defaults ; \
-	mkdir -p /opt/talecaster/build ; \
-	mkdir -p /var/log/runit ; \
-	touch /firstboot ; \
-	mv /etc/apk/repositories /etc/apk/repositories.bak ; \
-	echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/main" >> /etc/apk/repositories ; \
-	echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories ; \
-	apk update ; \
-	apk upgrade ; \
-	sed -i -e '/^tty*/d' /etc/inittab ; \
-	sed -i -e '/^# Set up*/d' /etc/inittab ; \
-	sed -i -e '/^::ctrlalt*/d' /etc/inittab ; \
-	sed -i -e '/.*salute$/d' /etc/inittab ; \
+RUN mkdir -p /opt/talecaster/build && \
+	mkdir -p /var/log/runit && \
+	touch /firstboot && \
+	apk update && \
+	apk upgrade && \
 	for bld in `ls /opt/talecaster/build/ | sort`; do \
-		/opt/talecaster/build/$bld ; \
-	done ; \
-	rm /opt/talecaster/build/*
+		/opt/talecaster/build/$bld && \
+	done ; 
+	#rm /opt/talecaster/build/*
 	
 
 VOLUME [ "/run", "/config", "/shared", "/downloads" ]
