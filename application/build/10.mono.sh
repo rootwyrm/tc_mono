@@ -72,7 +72,7 @@ build_mono()
 	echo "$(date '+%b %d %H:%M:%S') [MONO] autogen.sh complete."
 
 	echo "$(date '+%b %d %H:%M:%S') [MONO] Building..."
-	make CFLAGS=-Os > /dev/null 2>&1
+	make 
 	CHECK_ERROR $? "mono_build"
 	echo "$(date '+%b %d %H:%M:%S') [MONO] Build complete."
 
