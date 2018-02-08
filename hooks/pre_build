@@ -28,16 +28,16 @@ build_variables()
 	## NOTE: Do not place space
 	printf 'LS_SCHEMAVERSION=%s\n' "1.0" >> $RUNFILE
 	printf 'LS_VENDOR=%s\n' "TaleCaster" >> $RUNFILE
-	printf 'LS_NAME=%s\n' "TaleCaster_base" >> $RUNFILE
-	printf 'LS_URL=%s\n' "https://github.com/rootwyrm/talecaster" >> $RUNFILE
+	printf 'LS_NAME=%s\n' "tc_mono" >> $RUNFILE
+	printf 'LS_URL=%s\n' "https://github.com/rootwyrm/tc_mono" >> $RUNFILE
 	printf 'LS_BLDDATE=%s\n' "$DATE_FANCY" >> $RUNFILE
 	printf 'VCS_REF=%s\n' $GIT_REV_SHORT >> $RUNFILE
 	printf 'RW_VCSHASH=%s\n' $GIT_REV_HASH >> $RUNFILE
 	printf 'RW_BLDHASH=%s\n' $GIT_REV_HASH >> $RUNFILE
 	printf 'LS_BLDDATE=%s\n' $DATE_HASH >> $RUNFILE
 
-	# get releaseid from /application/id.release
-	# get servicename from /application/id.service
+	# XXX: get releaseid from /application/id.release
+	# XXX: get servicename from /application/id.service
 }
 
 plug_variable_dockerfile()
