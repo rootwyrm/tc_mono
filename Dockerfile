@@ -28,24 +28,21 @@ LABEL	com.rootwyrm.product="TaleCaster" \
 		org.label-schema.version="$RW_BLDHASH" \
 		org.label-schema.build-date="$LS_BLDDATE"
 
-#ENV pkg_common="runit file dcron apk-cron openssl bash"
-
 ## Create common elements
 COPY [ "application/", "/opt/talecaster" ]
-#COPY [ "sv/", "/etc/sv" ]
 
-RUN mkdir -p /opt/talecaster/build && \
+RUN echo "$(date '+%b %d %H:%M:%S') [RUN] phase beginning." ; \
+	mkdir -p /opt/talecaster/build && \
 	mkdir -p /var/log/runit && \
 	touch /firstboot && \
 	apk update && \
 	apk upgrade && \
 	for bld in `ls /opt/talecaster/build/ | sort`; do \
-		/opt/talecaster/build/$bld && \
-	done ; 
-	#rm /opt/talecaster/build/*
+		/opt/talecaster/build/$bld ; \
+	done && \
+	echo "$(date '+%b %d %H:%M:%S') [RUN] phase complete."
 	
-
-VOLUME [ "/run", "/config", "/shared", "/downloads" ]
+VOLUME [ "/run", "/shared" ]
 
 ## Handle rebuilds in a nicer fashion.
 ONBUILD RUN apk update ; apk upgrade
