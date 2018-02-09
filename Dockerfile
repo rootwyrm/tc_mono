@@ -40,6 +40,8 @@ RUN echo "$(date '+%b %d %H:%M:%S') [RUN] phase beginning." ; \
 	for bld in `ls /opt/talecaster/build/ | sort`; do \
 		/opt/talecaster/build/$bld ; \
 	done && \
+	rm -f /opt/talecaster/build/* && \
+	rmdir /opt/talecaster/build && \
 	echo "$(date '+%b %d %H:%M:%S') [RUN] phase complete."
 	
 VOLUME [ "/run", "/shared" ]
