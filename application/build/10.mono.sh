@@ -32,15 +32,6 @@ install_runtime()
 	echo "$(date '+%b %d %H:%M:%S') [BUILD] Installing runtime dependencies as $vrpkg"
 	/sbin/apk --no-cache add --virtual $vrpkg $vrpkg_content > /dev/null 2>&1
 	CHECK_ERROR $? $vrpkg
-
-	## sitecustomize check
-	cp /opt/talecaster/python/sitecustomize.py /usr/lib/python2.7/site-packages/sitecustomize.py
-	CHECK_ERROR $? "sitecutomize"
-
-	if [ ! -f /usr/lib/python2.7/site-packages/sitecustomize.py ]; then
-		echo "$buildname: [FATAL] Missing python2.7/site-packages/sitecustomize.py!"
-		exit 2
-	fi
 }
 
 install_buildpkg()
@@ -72,12 +63,12 @@ build_mono()
 	echo "$(date '+%b %d %H:%M:%S') [MONO] autogen.sh complete."
 
 	echo "$(date '+%b %d %H:%M:%S') [MONO] Building..."
-	make 
+	make > /dev/null 2>&1
 	CHECK_ERROR $? "mono_build"
 	echo "$(date '+%b %d %H:%M:%S') [MONO] Build complete."
 
 	echo "$(date '+%b %d %H:%M:%S') [MONO] Doing make install..."
-	make install
+	make install > /dev/null 2>&1
 	CHECK_ERROR $? "mono_install"
 	echo "$(date '+%b %d %H:%M:%S') [MONO] make install complete"
 }
